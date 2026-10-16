@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0f" />
+  <title>Кабинет — BeautyRostov</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="aurora" aria-hidden="true"></div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__dot"></span>
+        Beauty<em>Rostov</em>
+      </a>
+
+      <div class="user-menu" id="userMenu" hidden>
+        <button class="user-menu__trigger" id="userMenuTrigger" aria-label="Меню пользователя">
+          <img id="userAvatar" class="user-menu__avatar" alt="" />
+        </button>
+        <div class="user-menu__dropdown" id="userMenuDropdown" hidden>
+          <a href="cabinet.html" class="user-menu__item">Личный кабинет</a>
+          <button class="user-menu__item user-menu__item--danger" id="logoutBtn">Выйти</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container cabinet">
+    <div id="cabinetLoading" class="loading">Загружаем кабинет…</div>
+
+    <section id="clientView" hidden>
+      <h1 class="cabinet__title">Мои записи</h1>
+      <p class="cabinet__subtitle">Здесь появятся все ваши заявки.</p>
+      <div id="clientBookings" class="bookings-list"></div>
+    </section>
+
+    <section id="masterView" hidden>
+      <h1 class="cabinet__title">Кабинет мастера</h1>
+      <p class="cabinet__subtitle">Заполните карточку — она появится в каталоге.</p>
+
+      <div class="sub-banner" id="subBanner" hidden>
+        <div class="sub-banner__icon" id="subIcon">🎁</div>
+        <div class="sub-banner__text">
+          <div class="sub-banner__title" id="subTitle">Загрузка статуса…</div>
+          <div class="sub-banner__desc" id="subDesc"></div>
+        </div>
+      </div>
+
+      <form id="masterProfileForm" class="form card-form">
+
+        <div class="photo-uploader">
+          <div class="photo-uploader__preview" id="photoPreview">
+            <span class="photo-uploader__placeholder">💅</span>
+          </div>
+
+          <div class="photo-uploader__controls">
+            <label class="btn btn--glass photo-uploader__btn">
+              📷 Аватарка
+              <input type="file" id="photoInput" accept="image/*" hidden />
+            </label>
+
+            <button type="button" class="photo-uploader__remove" id="photoRemoveBtn" hidden>
+              Удалить
+            </button>
+          </div>
+
+          <div class="photo-uploader__progress" id="photoProgress" hidden>
+            <div class="photo-uploader__progress-bar" id="photoProgressBar"></div>
+          </div>
+        </div>
+
+        <div class="works">
+          <div class="works__head">
+            <span class="works__label">Работы <small>(до 6 фото)</small></span>
+            <label class="btn btn--glass works__add" id="worksAddBtn">
+              + Добавить
+              <input type="file" id="worksInput" accept="image/*" multiple hidden />
+            </label>
+          </div>
+
+          <div class="works__grid" id="worksGrid">
+            <p class="works__empty" id="worksEmpty">Пока нет фото работ</p>
+          </div>
+
+          <div class="photo-uploader__progress" id="worksProgress" hidden>
+            <div class="photo-uploader__progress-bar" id="worksProgressBar"></div>
+          </div>
+        </div>
+
+        <label class="form__label">
+          Имя / название
+          <input type="text" id="mName" class="form__input" required placeholder="Анна Иванова" />
+        </label>
+
+        <div class="form__row">
+          <label class="form__label">
+            Категория
+            <select id="mCategory" class="form__input" required>
+              <option value="Ногти">Ногти</option>
+              <option value="Брови">Брови</option>
+              <option value="Волосы">Волосы</option>
+            </select>
+          </label>
+
+          <label class="form__label">
+            Район
+            <select id="mDistrict" class="form__input" required>
+              <option value="Ворошиловский">Ворошиловский</option>
+              <option value="Железнодорожный">Железнодорожный</option>
+              <option value="Кировский">Кировский</option>
+              <option value="Ленинский">Ленинский</option>
+              <option value="Октябрьский">Октябрьский</option>
+              <option value="Первомайский">Первомайский</option>
+              <option value="Пролетарский">Пролетарский</option>
+              <option value="Советский">Советский</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="form__label">
+          Название услуги
+          <input type="text" id="mService" class="form__input" required placeholder="Маникюр + гель-лак" />
+        </label>
+
+        <label class="form__label">
+          Цена, ₽
+          <input type="number" id="mPrice" class="form__input" required min="100" step="50" placeholder="2000" />
+        </label>
+
+        <label class="form__check">
+          <input type="checkbox" id="masterAgreeCheckbox" required />
+          <span>
+            Я принимаю <a href="oferta.html" target="_blank">Публичную оферту</a>
+            и согласен с <a href="privacy.html" target="_blank">Политикой обработки персональных данных</a>
+          </span>
+        </label>
+
+        <button type="submit" class="btn btn--primary btn--block">
+          Сохранить карточку
+        </button>
+
+        <button type="button" class="btn btn--danger btn--block" id="deleteProfileBtn" hidden>
+          🗑 Удалить карточку
+        </button>
+      </form>
+
+      <h2 class="cabinet__subtitle" style="margin-top:32px;">Входящие заявки</h2>
+      <div id="masterBookings" class="bookings-list"></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__copy">© 2026 BeautyRostov. Все права защищены.</p>
+      <p class="footer__requisites">
+        Самозанятый <strong>Мерзляков Никита Евгеньевич</strong><br>
+        ИНН <strong>613645038759</strong> · Email: <a href="mailto:merzlakovnikita34@gmail.com">merzlakovnikita34@gmail.com</a>
+      </p>
+      <nav class="footer__links">
+        <a href="oferta.html">Публичная оферта</a>
+        <a href="privacy.html">Политика конфиденциальности</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script type="module" src="cabinet.js"></script>
+</body>
+              </html>
